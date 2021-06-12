@@ -10,8 +10,20 @@ public class Player extends GameObject{
 
     @Override
     public void tick() {
-        this.x += velX;
         this.y += velY;
+        this.x += velX;
+
+        x = clamp(x,0,Game.WIDTH - 32);
+        y = clamp(y,0,Game.HEIGHT - 64);
+    }
+
+    private int clamp(int val, int min, int max) {
+        if(val >= max)
+            return max;
+        else if(val <= min)
+            return min;
+        else
+            return val;
     }
 
     @Override

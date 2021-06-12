@@ -7,8 +7,8 @@ public class Game extends Canvas implements Runnable {
 
     private static final long serialVersionUID = -6472910296922747910L;
 
-    private static final int WIDTH = 640;
-    private static final int HEIGHT = 640 / 12 * 9;
+    public static final int WIDTH = 640;
+    public static final int HEIGHT = 640 / 12 * 9;
 
     private Thread thread;
     private boolean isRunning;
@@ -17,7 +17,8 @@ public class Game extends Canvas implements Runnable {
 
     public Game(){
         this.handler = new Handler();
-        this.handler.addObject(new Player(100,100,ID.Player));
+        this.handler.addObject(new Player(100,320,ID.Player));
+        this.handler.addObject(new BasicEnemy(100,100,ID.Enemy));
 
         this.addKeyListener(new KeyInput(this.handler));
         new Window(WIDTH, HEIGHT, "Let's Build A Game", this);
@@ -44,6 +45,7 @@ public class Game extends Canvas implements Runnable {
 
     @Override
     public void run() {
+        this.requestFocus();
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
