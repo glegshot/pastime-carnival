@@ -13,8 +13,13 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private boolean isRunning;
 
+    private Handler handler;
 
     public Game(){
+        this.handler = new Handler();
+        this.handler.addObject(new Player(100,100,ID.Player));
+
+        this.addKeyListener(new KeyInput(this.handler));
         new Window(WIDTH, HEIGHT, "Let's Build A Game", this);
     }
 
@@ -60,7 +65,7 @@ public class Game extends Canvas implements Runnable {
 
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
-                System.out.println("FPS : "+frames);
+                //System.out.println("FPS : "+frames);
                 frames = 0;
             }
         }
@@ -77,11 +82,14 @@ public class Game extends Canvas implements Runnable {
         Graphics graphics = bufferStrategy.getDrawGraphics();
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0,0,WIDTH,HEIGHT);
-
+        this.handler.render(graphics);
         graphics.dispose();
         bufferStrategy.show();
+
+
     }
 
     private void tick() {
+        this.handler.tick();
     }
 }
