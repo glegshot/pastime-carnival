@@ -26,4 +26,9 @@ public class BasicEnemy extends GameObject{
         graphics.setColor(Color.RED);
         graphics.fillRect(x,y,16,16);
     }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, 16, 16);
+    }
 }

@@ -14,11 +14,13 @@ public class Game extends Canvas implements Runnable {
     private boolean isRunning;
 
     private Handler handler;
+    private HUD hud;
 
     public Game(){
         this.handler = new Handler();
-        this.handler.addObject(new Player(100,320,ID.Player));
+        this.handler.addObject(new Player(100,320,ID.Player, this.handler));
         this.handler.addObject(new BasicEnemy(100,100,ID.Enemy));
+        this.hud = new HUD();
 
         this.addKeyListener(new KeyInput(this.handler));
         new Window(WIDTH, HEIGHT, "Let's Build A Game", this);
@@ -85,6 +87,7 @@ public class Game extends Canvas implements Runnable {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0,0,WIDTH,HEIGHT);
         this.handler.render(graphics);
+        this.hud.render(graphics);
         graphics.dispose();
         bufferStrategy.show();
 
@@ -92,6 +95,8 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
+
         this.handler.tick();
+        this.hud.tick();
     }
 }
