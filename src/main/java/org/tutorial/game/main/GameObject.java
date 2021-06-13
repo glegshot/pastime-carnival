@@ -1,5 +1,6 @@
 package org.tutorial.game.main;
 
+import javax.swing.*;
 import java.awt.*;
 
 public abstract class GameObject {
@@ -10,10 +11,15 @@ public abstract class GameObject {
     protected int velX;
     protected int velY;
 
-    public GameObject(int x, int y, ID id){
+    protected BufferedImageLoader bufferedImageLoader;
+    protected SpriteSheet spriteSheet;
+
+
+    public GameObject(int x, int y, ID id, BufferedImageLoader bufferedImageLoader){
         this.x = x;
         this.y = y;
         this.id = id;
+        this.bufferedImageLoader = bufferedImageLoader;
     }
 
     public abstract void tick();

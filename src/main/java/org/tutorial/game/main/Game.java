@@ -15,12 +15,14 @@ public class Game extends Canvas implements Runnable {
 
     private Handler handler;
     private HUD hud;
+    private BufferedImageLoader bufferedImageLoader;
 
     public Game(){
+        this.bufferedImageLoader = new BufferedImageLoader();
         this.handler = new Handler();
-        this.handler.addObject(new Player(100,320,ID.Player, this.handler));
-        this.handler.addObject(new BasicEnemy(100,100,ID.Enemy));
-        this.hud = new HUD();
+        this.handler.addObject(new Player(100,320,ID.Player, this.handler, this.bufferedImageLoader));
+        //this.handler.addObject(new BasicEnemy(100,100,ID.Enemy,this.bufferedImageLoader));
+        //this.hud = new HUD();
 
         this.addKeyListener(new KeyInput(this.handler));
         new Window(WIDTH, HEIGHT, "Let's Build A Game", this);
@@ -49,7 +51,7 @@ public class Game extends Canvas implements Runnable {
     public void run() {
         this.requestFocus();
         long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0;
+        double amountOfTicks = 10.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
@@ -87,7 +89,7 @@ public class Game extends Canvas implements Runnable {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0,0,WIDTH,HEIGHT);
         this.handler.render(graphics);
-        this.hud.render(graphics);
+        //this.hud.render(graphics);
         graphics.dispose();
         bufferStrategy.show();
 
@@ -97,6 +99,6 @@ public class Game extends Canvas implements Runnable {
     private void tick() {
 
         this.handler.tick();
-        this.hud.tick();
+        //this.hud.tick();
     }
 }

@@ -1,20 +1,32 @@
 package org.tutorial.game.main;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Player extends GameObject{
 
     private Handler handler;
+    private String spriteSheetPath = "/Idle.png";
 
-    public Player(int x, int y, ID id, Handler handler) {
-        super(x, y, id);
+    protected int row = 1;
+    protected int col = 1;
+
+    public Player(int x, int y, ID id, Handler handler,BufferedImageLoader imageLoader) {
+        super(x, y, id, imageLoader);
         this.handler = handler;
+        BufferedImage bufferedImage = this.bufferedImageLoader.loadImage(spriteSheetPath);
+        this.spriteSheet = new SpriteSheet(bufferedImage);
     }
 
     @Override
     public void tick() {
         this.y += velY;
         this.x += velX;
+
+        this.row++;
+        if(this.row > 6){
+            this.row = this.row % 6;
+        }
 
         x = clamp(x,0,Game.WIDTH - 32);
         y = clamp(y,0,Game.HEIGHT - 64);
@@ -45,14 +57,16 @@ public class Player extends GameObject{
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.WHITE);
-        graphics.fillRect(x,y,32,32);
+        //graphics.setColor(Color.WHITE);
+        //graphics.fillRect(x,y,32,32);
+        graphics.drawImage(this.spriteSheet.grabImage(row, col,155,155),x,y,null);
     }
 
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x, y, 32, 32);
     }
+
 
 
 }
