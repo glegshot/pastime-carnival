@@ -6,10 +6,13 @@ import java.awt.image.BufferedImage;
 public class Player extends GameObject{
 
     private Handler handler;
-    private String spriteSheetPath = "/Idle.png";
+    private String spriteSheetPath = "/Player.png";
 
     protected int row = 1;
-    protected int col = 1;
+    protected int col = 6;
+
+
+
 
     public Player(int x, int y, ID id, Handler handler,BufferedImageLoader imageLoader) {
         super(x, y, id, imageLoader);
@@ -28,8 +31,8 @@ public class Player extends GameObject{
             this.row = this.row % 6;
         }
 
-        x = clamp(x,0,Game.WIDTH - 32);
-        y = clamp(y,0,Game.HEIGHT - 64);
+        x = clamp(x,0,Game.WIDTH - 135);
+        y = clamp(y,0,Game.HEIGHT - 165);
 
         collisionDetection();
 
@@ -59,7 +62,7 @@ public class Player extends GameObject{
     public void render(Graphics graphics) {
         //graphics.setColor(Color.WHITE);
         //graphics.fillRect(x,y,32,32);
-        graphics.drawImage(this.spriteSheet.grabImage(row, col,155,155),x,y,null);
+        graphics.drawImage(this.spriteSheet.grabImage(row, col,155,165),x,y,null);
     }
 
     @Override
