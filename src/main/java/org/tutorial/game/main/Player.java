@@ -11,11 +11,11 @@ public class Player extends GameObject{
     protected int row = 1;
     protected int col = 6;
 
-
-
+    private long delay;
 
     public Player(int x, int y, ID id, Handler handler,BufferedImageLoader imageLoader) {
         super(x, y, id, imageLoader);
+        this.delay = System.currentTimeMillis();
         this.handler = handler;
         BufferedImage bufferedImage = this.bufferedImageLoader.loadImage(spriteSheetPath);
         this.spriteSheet = new SpriteSheet(bufferedImage);
@@ -26,11 +26,13 @@ public class Player extends GameObject{
         this.y += velY;
         this.x += velX;
 
-        this.row++;
-        if(this.row > 6){
-            this.row = this.row % 6;
+        long now = System.currentTimeMillis();
+        if(now - delay > 100) {
+            this.row++;
+            if (this.row > 6) {
+                this.row = this.row % 6;
+            }
         }
-
         x = clamp(x,0,Game.WIDTH - 135);
         y = clamp(y,0,Game.HEIGHT - 165);
 

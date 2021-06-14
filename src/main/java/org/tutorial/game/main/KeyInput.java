@@ -17,13 +17,13 @@ public class KeyInput extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
        Player player = (Player) this.handler.gameObjectList.stream().filter(gameObject -> gameObject.id == ID.Player).collect(Collectors.toList()).get(0);
        if(e.getKeyCode() == KeyEvent.VK_W){
-           player.setVelY(-5);
+           ///player.setVelY(-5);
        }else if(e.getKeyCode() == KeyEvent.VK_S){
-           player.setVelY(5);
+           //player.setVelY(5);
        }else if(e.getKeyCode() == KeyEvent.VK_A){
-           player.setVelX(-5);
+           //player.setVelX(-5);
        }else if(e.getKeyCode() == KeyEvent.VK_D){
-           player.setVelX(5);
+           //player.setVelX(5);
        }
     }
 
@@ -31,13 +31,13 @@ public class KeyInput extends KeyAdapter {
     public void keyReleased(KeyEvent e) {
         Player player = (Player) this.handler.gameObjectList.stream().filter(gameObject -> gameObject.id == ID.Player).collect(Collectors.toList()).get(0);
         if(e.getKeyCode() == KeyEvent.VK_W){
-            player.setVelY(0);
+            //player.setVelY(0);
         }else if(e.getKeyCode() == KeyEvent.VK_S){
-            player.setVelY(0);
+            //player.setVelY(0);
         }else if(e.getKeyCode() == KeyEvent.VK_A){
-            player.setVelX(0);
+            //player.setVelX(0);
         }else if(e.getKeyCode() == KeyEvent.VK_D){
-            player.setVelX(0);
+            //player.setVelX(0);
         }
     }
 }
