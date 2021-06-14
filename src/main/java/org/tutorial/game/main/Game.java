@@ -89,6 +89,8 @@ public class Game extends Canvas implements Runnable {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0,0,WIDTH,HEIGHT);
         this.handler.render(graphics);
+        graphics.setColor(Color.GREEN);
+        graphics.drawLine(0,352,640,352);
         //this.hud.render(graphics);
         graphics.dispose();
         bufferStrategy.show();

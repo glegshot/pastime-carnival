@@ -11,11 +11,17 @@ public class Player extends GameObject{
     protected int row = 1;
     protected int col = 6;
 
+    protected int maxHeight = 20;
+    protected int currentHeight = 0;
 
+    private long delay;
 
+    boolean isJump = false;
+    boolean isFall = false;
 
     public Player(int x, int y, ID id, Handler handler,BufferedImageLoader imageLoader) {
         super(x, y, id, imageLoader);
+        this.delay = System.currentTimeMillis();
         this.handler = handler;
         BufferedImage bufferedImage = this.bufferedImageLoader.loadImage(spriteSheetPath);
         this.spriteSheet = new SpriteSheet(bufferedImage);
@@ -23,16 +29,37 @@ public class Player extends GameObject{
 
     @Override
     public void tick() {
-        this.y += velY;
         this.x += velX;
 
-        this.row++;
-        if(this.row > 6){
-            this.row = this.row % 6;
+        if(isJump){
+            System.out.println("in JUMP x: "+x+" ,y: "+y);
+            if(currentHeight <= maxHeight){
+                System.out.println(currentHeight);
+                currentHeight++;
+                this.y += velY;
+            }else{
+                isJump = false;
+                isFall = true;
+                currentHeight = maxHeight;
+                this.setVelY(2);
+            }
         }
 
-        x = clamp(x,0,Game.WIDTH - 135);
-        y = clamp(y,0,Game.HEIGHT - 165);
+        if(isFall){
+            System.out.println("in FALL x: "+x+" ,y: "+y);
+            if(currentHeight >= 0){
+                this.y += velY;
+                System.out.println("in fall"+ currentHeight);
+                currentHeight--;
+            }else{
+                isFall = false;
+                this.setVelY(0);
+                currentHeight = 0;
+            }
+        }
+
+        x = clamp(x,0,Game.WIDTH - 36);
+        y = clamp(y,0,Game.HEIGHT - 70);
 
         collisionDetection();
 
@@ -60,9 +87,9 @@ public class Player extends GameObject{
 
     @Override
     public void render(Graphics graphics) {
-        //graphics.setColor(Color.WHITE);
-        //graphics.fillRect(x,y,32,32);
-        graphics.drawImage(this.spriteSheet.grabImage(row, col,155,165),x,y,null);
+        graphics.setColor(Color.WHITE);
+        graphics.drawRect(x,y,32,32);
+        //graphics.drawImage(this.spriteSheet.grabImage(row, col,155,165),x,y,null);
     }
 
     @Override
