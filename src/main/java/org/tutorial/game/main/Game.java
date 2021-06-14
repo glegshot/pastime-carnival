@@ -21,8 +21,8 @@ public class Game extends Canvas implements Runnable {
         this.bufferedImageLoader = new BufferedImageLoader();
         this.handler = new Handler();
         this.handler.addObject(new Player(100,320,ID.Player, this.handler, this.bufferedImageLoader));
-        //this.handler.addObject(new BasicEnemy(100,100,ID.Enemy,this.bufferedImageLoader));
-        //this.hud = new HUD();
+        this.handler.addObject(new BasicEnemy(500,350,ID.Enemy,this.bufferedImageLoader));
+        this.hud = new HUD();
 
         this.addKeyListener(new KeyInput(this.handler));
         new Window(WIDTH, HEIGHT, "Let's Build A Game", this);
@@ -91,7 +91,7 @@ public class Game extends Canvas implements Runnable {
         this.handler.render(graphics);
         graphics.setColor(Color.GREEN);
         graphics.drawLine(0,352,640,352);
-        //this.hud.render(graphics);
+        this.hud.render(graphics);
         graphics.dispose();
         bufferStrategy.show();
 
@@ -101,6 +101,6 @@ public class Game extends Canvas implements Runnable {
     private void tick() {
 
         this.handler.tick();
-        //this.hud.tick();
+        this.hud.tick();
     }
 }

@@ -16,24 +16,24 @@ public class KeyInput extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
        Player player = (Player) this.handler.gameObjectList.stream().filter(gameObject -> gameObject.id == ID.Player).collect(Collectors.toList()).get(0);
        if(e.getKeyCode() == KeyEvent.VK_W){
+           System.out.println("UP KEY");
            if(!(player.isJump || player.isFall)) {
-               System.out.println("inside w press");
-               player.setVelY(-2);
+               player.setVelY(-5);
                player.isJump = true;
                player.isFall = false;
-               printCoordinates(player);
+               //printCoordinates(player);
            }
        }
        if(e.getKeyCode() == KeyEvent.VK_S){
-           printCoordinates(player);
+           //printCoordinates(player);
        }
        if(e.getKeyCode() == KeyEvent.VK_A){
            player.setVelX(-5);
-           printCoordinates(player);
+           //printCoordinates(player);
        }
        if(e.getKeyCode() == KeyEvent.VK_D){
            player.setVelX(5);
-           printCoordinates(player);
+           //sprintCoordinates(player);
        }
     }
 

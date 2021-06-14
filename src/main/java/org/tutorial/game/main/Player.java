@@ -32,24 +32,24 @@ public class Player extends GameObject{
         this.x += velX;
 
         if(isJump){
-            System.out.println("in JUMP x: "+x+" ,y: "+y);
+            //System.out.println("in JUMP x: "+x+" ,y: "+y);
             if(currentHeight <= maxHeight){
-                System.out.println(currentHeight);
+                //System.out.println(currentHeight);
                 currentHeight++;
                 this.y += velY;
             }else{
                 isJump = false;
                 isFall = true;
                 currentHeight = maxHeight;
-                this.setVelY(2);
+                this.setVelY(5);
             }
         }
 
         if(isFall){
-            System.out.println("in FALL x: "+x+" ,y: "+y);
+            //System.out.println("in FALL x: "+x+" ,y: "+y);
             if(currentHeight >= 0){
                 this.y += velY;
-                System.out.println("in fall"+ currentHeight);
+                //System.out.println("in fall"+ currentHeight);
                 currentHeight--;
             }else{
                 isFall = false;
